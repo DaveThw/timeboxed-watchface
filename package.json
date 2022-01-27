@@ -38,7 +38,7 @@
         },
         {
           "type": "font",
-          "characterRegex": "[a-zA-Z0-7*()#$%]",
+          "characterRegex": "[a-zA-Z0-7*()#$%?]",
           "compatibility": "2.7",
           "file": "fonts/custom-icons.ttf",
           "name": "FONT_ICONS_20",
