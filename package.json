@@ -38,7 +38,7 @@
         },
         {
           "type": "font",
-          "characterRegex": "[a-zA-Z0-7*()#$%]",
+          "characterRegex": "[a-zA-Z0-7*()#$%?]",
           "compatibility": "2.7",
           "file": "fonts/custom-icons.ttf",
           "name": "FONT_ICONS_20",
@@ -467,7 +467,9 @@
       "KEY_CUSTOMTEXTATEXT": 137,
       "KEY_CUSTOMTEXTBTEXT": 138,
       "KEY_CUSTOMTEXTACOLOR": 139,
-      "KEY_CUSTOMTEXTBCOLOR": 140
+      "KEY_CUSTOMTEXTBCOLOR": 140,
+      "KEY_QUIETTIMECOLOR": 141,
+      "KEY_QUIETTIMEON": 142
     },
     "enableMultiJS": true,
     "displayName": "Timeboxed",

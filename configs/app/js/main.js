@@ -663,6 +663,12 @@ class Layout extends Component {
                                 onChange={this.onChange.bind(this, 'bluetoothColor')}
                             />
                             <ColorPicker
+                                fieldName="quietTimeColor"
+                                label={'Quiet time enabled'}
+                                color={state.quietTimeColor}
+                                onChange={this.onChange.bind(this, 'quietTimeColor')}
+                            />
+                            <ColorPicker
                                 fieldName="updateColor"
                                 label={'Update notification'}
                                 color={state.updateColor}
@@ -986,6 +992,18 @@ class Layout extends Component {
                         />
                     </OptionGroup>
                 )}
+	    
+	        {this.isEnabled(['24']) && (
+                    <OptionGroup title={'Phone battery state'}>
+                        <RadioButtonGroup
+                            fieldName="phoneBatteryTime"
+                            label={'Refresh interval'}
+                            options={refreshTimes}
+                            selectedItem={state.phoneBatteryTime}
+                            onChange={this.onChange.bind(this, 'phoneBatteryTime')}
+                        />
+                    </OptionGroup>
+                )}	    
 
                 {this.isEnabled(['24']) && (
                     <OptionGroup title={'Phone battery state'}>
@@ -1444,6 +1462,7 @@ class ColorPresets extends Component {
                 phoneBatteryColor: w,
                 phoneBatteryLowColor: w,
                 bluetoothColor: w,
+                quietTimeColor: w,
                 updateColor: w,
                 weatherColor: w,
                 tempColor: w,
@@ -3004,6 +3023,7 @@ const defaultColors = {
     phoneBatteryColor: w,
     phoneBatteryLowColor: w,
     bluetoothColor: w,
+    quietTimeColor: w,
     updateColor: w,
     weatherColor: w,
     tempColor: w,
