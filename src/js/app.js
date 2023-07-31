@@ -685,9 +685,9 @@ function fetchOpenWeatherMapData(
     var url =
         'http://api.openweathermap.org/data/2.5/weather?appid=' + weatherKey;
     var urlForecast =
-        'http://api.openweathermap.org/data/2.5/forecast?appid=' +
+        'http://api.openweathermap.org/data/2.5/onecall?appid=' +
         weatherKey +
-        '&format=json&cnt=12';
+        '&format=json';
 
     if (!overrideLocation) {
         url += '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
@@ -695,11 +695,10 @@ function fetchOpenWeatherMapData(
             '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
     } else {
         url += '&q=' + encodeURIComponent(overrideLocation);
-        urlForecast += '&q=' + encodeURIComponent(overrideLocation);
     }
 
     console.log(url);
-    console.log(urlForecast);
+    //console.log(urlForecast);
 
     xhrRequest(url, 'GET', function(responseText) {
         try {
@@ -719,10 +718,22 @@ function fetchOpenWeatherMapData(
                 sunset = formatTimestamp(parseInt(resp.sys.sunset, 10));
                 console.log('sunrise: ' + sunrise);
                 console.log('sunset: ' + sunset);
+
             } catch (ex) {
                 console.log('error retrieving sunrise/sunset');
                 sunrise = 0;
                 sunset = 0;
+            }
+
+            try {
+              var lat = resp.coord.lat;
+              var lon = resp.coord.lon;
+              urlForecast += '&lat=' + lat + '&lon=' + lon;
+              console.log('latitude: ' + lat);
+              console.log('longitude: ' + lon);
+              console.log(urlForecast);
+            } catch (ex) {
+              console.log('error retrieving coordinates' + ex);
             }
 
             if (typeof condition === 'undefined') {
@@ -734,18 +745,18 @@ function fetchOpenWeatherMapData(
                     console.log('Retrieving forecast data from OpenWeatherMap');
                     var fResp = JSON.parse(forecastRespText);
 
-                    var max = (useCelsius ? kelvinToCelsius(fResp.list[0].main.temp_max) : kelvinToFahrenheit(fResp.list[0].main.temp_max));
-                    var min = (useCelsius ? kelvinToCelsius(fResp.list[0].main.temp_min) : kelvinToFahrenheit(fResp.list[0].main.temp_min));
+                    var max = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.max) : kelvinToFahrenheit(fResp.daily[0].temp.max));
+                    var min = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.min) : kelvinToFahrenheit(fResp.daily[0].temp.min));
 
-                    for (var fIndex in fResp.list) {
-                        var fDay = new Date(fResp.list[fIndex].dt * 1000);
+                    for (var fIndex in fResp.daily) {
+                        var fDay = new Date(fResp.daily[fIndex].dt * 1000);
                         if (day.getUTCDate() === fDay.getUTCDate()) {
-                            console.log(JSON.stringify(fResp.list[fIndex]));
-                            max = (useCelsius ? kelvinToCelsius(fResp.list[fIndex].main.temp_max) : kelvinToFahrenheit(
-                                      fResp.list[fIndex].main.temp_max
+                            console.log(JSON.stringify(fResp.daily[fIndex]));
+                            max = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.max) : kelvinToFahrenheit(
+                                      fResp.daily[fIndex].temp.max
                                   ));
-                            min = (useCelsius ? kelvinToCelsius(fResp.list[fIndex].main.temp_min) : kelvinToFahrenheit(
-                                      fResp.list[fIndex].main.temp_min
+                            min = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.min) : kelvinToFahrenheit(
+                                      fResp.daily[fIndex].temp.min
                                   ));
                         }
                     }
