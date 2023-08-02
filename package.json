@@ -469,7 +469,8 @@
       "KEY_CUSTOMTEXTACOLOR": 139,
       "KEY_CUSTOMTEXTBCOLOR": 140,
       "KEY_QUIETTIMECOLOR": 141,
-      "KEY_QUIETTIMEON": 142
+      "KEY_QUIETTIMEON": 142,
+      "KEY_DATELEADINGZERO": 143
     },
     "enableMultiJS": true,
     "displayName": "Timeboxed",
