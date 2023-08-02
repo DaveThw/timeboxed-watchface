@@ -586,6 +586,12 @@ class Layout extends Component {
                         selectedItem={state.dateSeparator}
                         onChange={this.onChange.bind(this, 'dateSeparator')}
                     />
+                    <ToggleField
+                        fieldName="dateLeadingZero"
+                        label={'Day & Month (number) with leading zero'}
+                        checked={state.dateLeadingZero}
+                        onChange={this.onChange.bind(this, 'dateLeadingZero')}
+                    />
                 </OptionGroup>
 
                 <OptionGroup title={'Colors'}>
@@ -2942,6 +2948,7 @@ const defaultState = {
     cryptoMultiB: false,
     cryptoMultiC: false,
     cryptoMultiD: false,
+    dateLeadingZero: true,
 };
 
 const cryptoMarkets = [

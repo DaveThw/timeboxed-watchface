@@ -26,6 +26,7 @@ bool is_quickview_disabled();
 bool is_tap_enabled();
 bool is_wrist_enabled();
 bool is_mute_on_quiet_enabled();
+bool is_date_leading_zero_disabled();
 
 int get_wind_speed_unit();
 void toggle_center_slots(bool);

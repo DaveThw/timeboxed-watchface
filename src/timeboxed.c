@@ -263,7 +263,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         KEY_QUICKVIEW,
         KEY_SHOWTAP,
         KEY_SHOWWRIST,
-        KEY_MUTEONQUIET
+        KEY_MUTEONQUIET,
+        KEY_DATELEADINGZERO
     };
 
     uint32_t config_flags[] = {
@@ -278,7 +279,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         FLAG_QUICKVIEW,
         FLAG_TAP,
         FLAG_WRIST,
-        FLAG_MUTEONQUIET
+        FLAG_MUTEONQUIET,
+        FLAG_DATELEADINGZERO
     };
     bool config_defaults[] = {
         true,
@@ -292,9 +294,10 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         false,
         true,
         true,
+        false,
         false
     };
-    uint8_t num_configs = 12;
+    uint8_t num_configs = 13;
 
     // configs
     for (int i = 0; i < num_configs; ++i) {

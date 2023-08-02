@@ -217,6 +217,10 @@ bool is_mute_on_quiet_enabled() {
     return get_config_toggles() && FLAG_MUTEONQUIET;
 }
 
+bool is_date_leading_zero_disabled() {
+    return get_config_toggles() & FLAG_DATELEADINGZERO;
+}
+
 #if !defined PBL_PLATFORM_APLITE
 int get_slot_for_module(int module) {
     if (!modules_loaded) {
