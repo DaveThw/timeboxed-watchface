@@ -504,7 +504,7 @@
     "bootstrap": "4.0.0-alpha.4",
     "bootstrap-loader": "^1.0.10",
     "bootstrap-toggle": "^2.2.2",
-    "classnames": "^2.2.3",
+    "classnames": "^2.5.1",
     "compression-webpack-plugin": "^0.3.1",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.2.1",
