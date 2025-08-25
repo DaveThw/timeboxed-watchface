@@ -35,6 +35,6 @@ Create action "Send intent", fill next fields:
        here!"}]
  - Extra: uuid:1354d7dc-b9e5-420d-9edf-533ee2fd4520
 
-In second extra key can be 136 (slot a) or 137 (slot b). 
+In second extra key can be 136 (slot a) or 137 (slot b).
 ## License
 Copyright (c) 2016 Luis Felipe Hussin Bento. Licensed under the MIT License.

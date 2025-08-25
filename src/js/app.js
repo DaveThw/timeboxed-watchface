@@ -1044,7 +1044,7 @@ var getPhoneBattery = function () {
         console.log('Phone charging = ' + battery.charging  + ".");
         Pebble.sendAppMessage(data);
     });
-}
+};
 
 var formatNumber = function(number) {
     var numberStr = '' + number;

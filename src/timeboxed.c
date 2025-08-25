@@ -80,7 +80,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         notify_update(update_val);
         return;
     }
-    
+
     Tuple *temp_tuple = dict_find(iterator, KEY_TEMP);
     Tuple *max_tuple = dict_find(iterator, KEY_MAX);
     Tuple *min_tuple = dict_find(iterator, KEY_MIN);
@@ -132,7 +132,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
             strcpy(custom_text_val, value);
             update_customtext_b_text(custom_text_val);
             store_customtext_b_text(custom_text_val);
-        }	
+        }
 
         return;
     }

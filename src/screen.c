@@ -72,7 +72,7 @@ void update_quiet_time_icon(bool force) {
       persist_write_int(KEY_QUIETTIMEON, 1);
     } else {
       set_quiet_time_layer_text("");
-      persist_write_int(KEY_QUIETTIMEON, 1);      
+      persist_write_int(KEY_QUIETTIMEON, 1);
     }
   }
 }

@@ -40,7 +40,7 @@ static void update_customtext_from_storage() {
     if (persist_exists(KEY_CUSTOMTEXTBTEXT)) {
         persist_read_string(KEY_CUSTOMTEXTBTEXT, custxt_b, sizeof(custxt_b));
         update_customtext_b_text(custxt_b);
-    }    
+    }
 }
 
 void store_customtext_a_text(char* custxt) {
@@ -57,7 +57,7 @@ void toggle_customtext(uint8_t reload_origin) {
         update_customtext_from_storage();
     } else {
         set_customtext_a_layer_text("");
-        set_customtext_b_layer_text("");	
+        set_customtext_b_layer_text("");
     }
 }
 

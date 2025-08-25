@@ -10,7 +10,7 @@ static bool phonebattery_enabled;
 static bool force_update = false;
 static int last_update = 0;
 static int phonebattery_interval = 5;
-/* exp time == 90 + 10 extra (because in timeboxed.c time when pebble 
+/* exp time == 90 + 10 extra (because in timeboxed.c time when pebble
 health available delay may be up to 90 minutes) */
 static int phonebattery_expiration = 100;
 static int phonebattery_level;

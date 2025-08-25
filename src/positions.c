@@ -170,7 +170,7 @@ static void get_text_positions_din(GTextAlignment align, struct TextPositions* p
         PBL_IF_ROUND_ELSE(midpoint + 40,
             get_pos(align, midpoint - 6, midpoint + 40, midpoint - 6)
         )
-    );    
+    );
     positions->updates = create_point(
         PBL_IF_ROUND_ELSE(120, get_pos(align, -4, 112, 0)),
         PBL_IF_ROUND_ELSE(midpoint + 40,

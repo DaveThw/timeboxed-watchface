@@ -71,7 +71,7 @@ class Layout extends Component {
             { value: '21', label: 'Cryptocurrency B' },
             { value: '22', label: 'Cryptocurrency C' },
             { value: '23', label: 'Cryptocurrency D' },
-            { value: '24', label: 'Phone battery state'},
+            { value: '24', label: 'Phone battery state' },
         ];
 
         this.modulesAplite = this.modulesAll.filter(
@@ -81,13 +81,14 @@ class Layout extends Component {
         this.textModulesAll = [
             ...this.modulesAll.filter(
                 (module) =>
-                    ['0', '3', '4', '5', '6', '7', '13', '16', '17', '20', '21', '22', '23', '24'].indexOf(module.value) !==
-                    -1
+                    ['0', '3', '4', '5', '6', '7', '13', '16', '17', '20', '21', '22', '23', '24'].indexOf(
+                        module.value
+                    ) !== -1
             ),
             { value: '18', label: 'Alternate time zone A' },
             { value: '19', label: 'Alternate time zone B' },
-	    { value: '25', label: 'Tasker text A'},
-	    { value: '26', label: 'Tasker text B'},
+            { value: '25', label: 'Tasker text A' },
+            { value: '26', label: 'Tasker text B' },
         ].sort((a, b) => parseInt(a.value, 10) - parseInt(b.value, 10));
 
         this.textModulesAplite = this.textModulesAll.filter(
@@ -479,36 +480,34 @@ class Layout extends Component {
                         onChange={this.onChange.bind(this, 'update')}
                     />
 
-                    {this.platform !== 'chalk' &&
-                        this.plaform !== 'aplite' && (
-                            <div>
-                                <ToggleField
-                                    fieldName="quickview"
-                                    label={'Enable Quickview mode'}
-                                    checked={state.quickview}
-                                    onChange={this.onChange.bind(this, 'quickview')}
-                                />
-                                <HelperText>
-                                    {
-                                        'Hides additional timezone and battery level and adjusts the layout when a timeline event is on the screen.'
-                                    }
-                                </HelperText>
-                            </div>
-                        )}
+                    {this.platform !== 'chalk' && this.plaform !== 'aplite' && (
+                        <div>
+                            <ToggleField
+                                fieldName="quickview"
+                                label={'Enable Quickview mode'}
+                                checked={state.quickview}
+                                onChange={this.onChange.bind(this, 'quickview')}
+                            />
+                            <HelperText>
+                                {
+                                    'Hides additional timezone and battery level and adjusts the layout when a timeline event is on the screen.'
+                                }
+                            </HelperText>
+                        </div>
+                    )}
                 </OptionGroup>
 
                 <OptionGroup title={'Modules'}>
                     <TabContainer
                         tabs={this.platform === 'chalk' ? this.getEnabledModulesRound() : this.getEnabledModules()}
                     />
-                    {this.isEnabled(['15']) &&
-                        !this.isEnabledTapWrist(['15']) && (
-                            <HelperText standalone={true}>
-                                {
-                                    '<strong>Alert:</strong> Keeping the compass enabled all the time could drain battery faster. It\'s recommend setting it as a \'Tap\' or \'Shake\' module (enable them below).'
-                                }
-                            </HelperText>
-                        )}
+                    {this.isEnabled(['15']) && !this.isEnabledTapWrist(['15']) && (
+                        <HelperText standalone={true}>
+                            {
+                                '<strong>Alert:</strong> Keeping the compass enabled all the time could drain battery faster. It\'s recommend setting it as a \'Tap\' or \'Shake\' module (enable them below).'
+                            }
+                        </HelperText>
+                    )}
                     {this.platform !== 'aplite' && (
                         <div>
                             <ToggleField
@@ -856,7 +855,7 @@ class Layout extends Component {
                                     onChange={this.onChange.bind(this, 'cryptoDColor')}
                                 />
                             )}
-			    {this.isEnabled(['25']) && (
+                            {this.isEnabled(['25']) && (
                                 <ColorPicker
                                     fieldName="customTextAColor"
                                     label={'Custom text A color'}
@@ -864,7 +863,7 @@ class Layout extends Component {
                                     onChange={this.onChange.bind(this, 'customTextAColor')}
                                 />
                             )}
-			    {this.isEnabled(['26']) && (
+                            {this.isEnabled(['26']) && (
                                 <ColorPicker
                                     fieldName="customTextBColor"
                                     label={'Custom text B color'}
@@ -1340,7 +1339,10 @@ class Swatches extends Component {
                         <RadioButtonGroup
                             fieldName="colorType"
                             size="small"
-                            options={[{ value: '0', label: 'Normal' }, { value: '1', label: 'Sunny' }]}
+                            options={[
+                                { value: '0', label: 'Normal' },
+                                { value: '1', label: 'Sunny' },
+                            ]}
                             selectedItem={this.state.sunny ? '1' : '0'}
                             onChange={this.onColorTypeChange}
                         />
@@ -1495,8 +1497,8 @@ class ColorPresets extends Component {
                 cryptoBColor: w,
                 cryptoCColor: w,
                 cryptoDColor: w,
-		customTextAColor: w,
-		customTextBColor: w,
+                customTextAColor: w,
+                customTextBColor: w,
             },
             Colorful: {
                 bgColor: '#000055',
@@ -1538,8 +1540,8 @@ class ColorPresets extends Component {
                 cryptoBColor: '#AAFFFF',
                 cryptoCColor: '#AAFFFF',
                 cryptoDColor: '#AAFFFF',
-		customTextAColor: '#AAFFFF',
-		customTextBColor: '#AAFFFF',		
+                customTextAColor: '#AAFFFF',
+                customTextBColor: '#AAFFFF',
             },
             'Green on black': {
                 bgColor: b,
@@ -1581,8 +1583,8 @@ class ColorPresets extends Component {
                 cryptoBColor: g,
                 cryptoCColor: g,
                 cryptoDColor: g,
-		customTextAColor: g,
-		customTextBColor: g,		
+                customTextAColor: g,
+                customTextBColor: g,
             },
             'Yellow/Orange on black': {
                 bgColor: b,
@@ -1624,8 +1626,8 @@ class ColorPresets extends Component {
                 cryptoBColor: o,
                 cryptoCColor: o,
                 cryptoDColor: o,
-		customTextAColor: o,
-		customTextBColor: o,		
+                customTextAColor: o,
+                customTextBColor: o,
             },
             'Blue on black': {
                 bgColor: b,
@@ -1667,8 +1669,8 @@ class ColorPresets extends Component {
                 cryptoBColor: u,
                 cryptoCColor: u,
                 cryptoDColor: u,
-		customTextAColor: u,
-		customTextBColor: u,		
+                customTextAColor: u,
+                customTextBColor: u,
             },
             'Red on black': {
                 bgColor: b,
@@ -1710,8 +1712,8 @@ class ColorPresets extends Component {
                 cryptoBColor: r,
                 cryptoCColor: r,
                 cryptoDColor: r,
-		customTextAColor: r,
-		customTextBColor: r,		
+                customTextAColor: r,
+                customTextBColor: r,
             },
             'Black and white (inverted)': {
                 bgColor: w,
@@ -1753,8 +1755,8 @@ class ColorPresets extends Component {
                 cryptoBColor: b,
                 cryptoCColor: b,
                 cryptoDColor: b,
-		customTextAColor: b,
-		customTextBColor: b,		
+                customTextAColor: b,
+                customTextBColor: b,
             },
             'Green on white': {
                 bgColor: w,
@@ -1796,8 +1798,8 @@ class ColorPresets extends Component {
                 cryptoBColor: g,
                 cryptoCColor: g,
                 cryptoDColor: g,
-		customTextAColor: g,
-		customTextBColor: g,		
+                customTextAColor: g,
+                customTextBColor: g,
             },
             'Blue on white': {
                 bgColor: w,
@@ -1837,8 +1839,8 @@ class ColorPresets extends Component {
                 cryptoBColor: d,
                 cryptoCColor: d,
                 cryptoDColor: d,
-		customTextAColor: d,
-		customTextBColor: d,		
+                customTextAColor: d,
+                customTextBColor: d,
             },
         };
 
@@ -2041,7 +2043,9 @@ class DropdownField extends React.Component {
             selectedItem:
                 typeof props.selectedItem !== 'undefined'
                     ? props.selectedItem
-                    : props.clearable ? null : props.options[0].value,
+                    : props.clearable
+                        ? null
+                        : props.options[0].value,
         };
     }
 

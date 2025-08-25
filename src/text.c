@@ -386,7 +386,7 @@ void create_text_layers(Window* window) {
         text_layer_set_background_color(phonebattery, GColorClear);
         text_layer_set_text_alignment(phonebattery, PBL_IF_ROUND_ELSE(GTextAlignmentCenter,
                     is_simple_mode_enabled() || slot > 3 ? text_align : (slot % 2 == 0 ? GTextAlignmentLeft : GTextAlignmentRight)));
-      
+
     }
 
 
@@ -409,7 +409,7 @@ void create_text_layers(Window* window) {
         text_layer_set_text_alignment(customtext_b, PBL_IF_ROUND_ELSE(GTextAlignmentCenter,
                     is_simple_mode_enabled() || slot > 3 ? text_align : (slot % 2 == 0 ? GTextAlignmentLeft : GTextAlignmentRight)));
     }
-    
+
     slot = get_slot_for_module(MODULE_CRYPTO);
     if (slot != -1) {
         pos = get_pos_for_item(slot, CRYPTO_ITEM, mode, selected_font, width, height);
@@ -789,9 +789,9 @@ void set_colors(Window *window) {
     if (is_module_enabled(MODULE_PHONEBATTERY)) {
         phonebattery_color = enable_advanced ? GColorFromHEX(persist_read_int(KEY_PHONEBATTERYCOLOR)) : base_color;
         phonebattery_low_color = enable_advanced ? GColorFromHEX(persist_read_int(KEY_PHONEBATTERYLOWCOLOR)) : base_color;
-    }    
+    }
     #endif
-    
+
     window_set_background_color(window, persist_read_int(KEY_BGCOLOR) ? GColorFromHEX(persist_read_int(KEY_BGCOLOR)) : GColorBlack);
 
     #if defined(PBL_HEALTH)
@@ -877,7 +877,7 @@ void set_colors(Window *window) {
     if (is_module_enabled(MODULE_CUSTOMTEXTB)) {
         set_text_color(customtext_b, enable_advanced && persist_read_int(KEY_CUSTOMTEXTBCOLOR) ? GColorFromHEX(persist_read_int(KEY_CUSTOMTEXTBCOLOR)) : base_color);
     }
-    
+
     if (is_module_enabled(MODULE_CRYPTO)) {
         set_text_color(crypto, enable_advanced && persist_read_int(KEY_CRYPTOCOLOR) ? GColorFromHEX(persist_read_int(KEY_CRYPTOCOLOR)) : base_color);
     }
