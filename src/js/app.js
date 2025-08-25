@@ -50,7 +50,7 @@ Pebble.addEventListener('appmessage', function(e) {
                 default:
                     weatherKey = '';
             }
-            console.log(weatherKey);
+            console.log('weatherKey: ' + weatherKey);
         }
         getWeather(
             provider,
@@ -685,14 +685,11 @@ function fetchOpenWeatherMapData(
     var url =
         'http://api.openweathermap.org/data/2.5/weather?appid=' + weatherKey;
     var urlForecast =
-        'http://api.openweathermap.org/data/2.5/onecall?appid=' +
-        weatherKey +
-        '&format=json';
+        'http://api.openweathermap.org/data/3.0/onecall?appid=' + weatherKey + '&exclude=minutely,hourly,alerts';
 
     if (!overrideLocation) {
         url += '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
-        urlForecast +=
-            '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
+        // urlForecast += '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
     } else {
         url += '&q=' + encodeURIComponent(overrideLocation);
     }
@@ -702,7 +699,7 @@ function fetchOpenWeatherMapData(
 
     xhrRequest(url, 'GET', function(responseText) {
         try {
-            console.log('Retrieving current weather from OpenWeatherMap');
+            console.log('Retrieved current weather from OpenWeatherMap');
             var sunrise, sunset;
             var resp = JSON.parse(responseText);
             var temp = (useCelsius ? kelvinToCelsius(resp.main.temp) : kelvinToFahrenheit(resp.main.temp));
@@ -740,24 +737,31 @@ function fetchOpenWeatherMapData(
                 condition = 0;
             }
 
+            var max = 0;
+            var min = 0;
             xhrRequest(urlForecast, 'GET', function(forecastRespText) {
                 try {
-                    console.log('Retrieving forecast data from OpenWeatherMap');
+                    console.log('Retrieved forecast data from OpenWeatherMap');
                     var fResp = JSON.parse(forecastRespText);
 
-                    var max = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.max) : kelvinToFahrenheit(fResp.daily[0].temp.max));
-                    var min = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.min) : kelvinToFahrenheit(fResp.daily[0].temp.min));
+                    if (fResp.cod !== undefined && fResp.cod !== 200) {
+                        console.log('Failed (Code ' + fResp.cod + '): ' + fResp.message);
+                    } else {
 
-                    for (var fIndex in fResp.daily) {
-                        var fDay = new Date(fResp.daily[fIndex].dt * 1000);
-                        if (day.getUTCDate() === fDay.getUTCDate()) {
-                            console.log(JSON.stringify(fResp.daily[fIndex]));
-                            max = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.max) : kelvinToFahrenheit(
-                                      fResp.daily[fIndex].temp.max
-                                  ));
-                            min = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.min) : kelvinToFahrenheit(
-                                      fResp.daily[fIndex].temp.min
-                                  ));
+                        max = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.max) : kelvinToFahrenheit(fResp.daily[0].temp.max));
+                        min = (useCelsius ? kelvinToCelsius(fResp.daily[0].temp.min) : kelvinToFahrenheit(fResp.daily[0].temp.min));
+
+                        for (var fIndex in fResp.daily) {
+                            var fDay = new Date(fResp.daily[fIndex].dt * 1000);
+                            if (day.getUTCDate() === fDay.getUTCDate()) {
+                                console.log('daily[' + fIndex + '] = ' + JSON.stringify(fResp.daily[fIndex]));
+                                max = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.max) : kelvinToFahrenheit(
+                                          fResp.daily[fIndex].temp.max
+                                      ));
+                                min = (useCelsius ? kelvinToCelsius(fResp.daily[fIndex].temp.min) : kelvinToFahrenheit(
+                                          fResp.daily[fIndex].temp.min
+                                      ));
+                            }
                         }
                     }
 
@@ -771,21 +775,32 @@ function fetchOpenWeatherMapData(
                         direction,
                         sunrise,
                         sunset
-                    );
+                   );
                 } catch (ex) {
                     console.log(
-                        'Failure requesting forecast data from OpenWeatherMap. Falling back to Yahoo.'
+                        'Failure requesting forecast data from OpenWeatherMap.'
                     );
                     console.log(ex.stack);
-                    fetchYahooData(pos, useCelsius, overrideLocation);
+
+                    sendData(
+                        temp,
+                        max,
+                        min,
+                        condition,
+                        feels,
+                        speed,
+                        direction,
+                        sunrise,
+                        sunset
+                   );
                 }
             });
+
         } catch (ex) {
             console.log(
-                'Failure requesting current weather from OpenWeatherMap. Falling back to Yahoo.'
+                'Failure requesting current weather from OpenWeatherMap.'
             );
             console.log(ex.stack);
-            fetchYahooData(pos, useCelsius, overrideLocation);
         }
     });
 }
