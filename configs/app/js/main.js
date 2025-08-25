@@ -244,7 +244,16 @@ class Layout extends Component {
 
     verifyLocation = (loc) => {
         console.log(loc);
-        verifyLocation(loc, this.state.weatherProvider, this.state.weatherKey);
+        let apiKey = '';
+        switch (this.state.weatherProvider) {
+            case '0':
+                apiKey = this.state.openWeatherKey;
+                break;
+            case '1':
+                apiKey = this.state.weatherKey;
+                break;
+        }
+        verifyLocation(loc, this.state.weatherProvider, apiKey);
     };
 
     getMasterKeyData = () => {
@@ -998,18 +1007,6 @@ class Layout extends Component {
                         />
                     </OptionGroup>
                 )}
-	    
-	        {this.isEnabled(['24']) && (
-                    <OptionGroup title={'Phone battery state'}>
-                        <RadioButtonGroup
-                            fieldName="phoneBatteryTime"
-                            label={'Refresh interval'}
-                            options={refreshTimes}
-                            selectedItem={state.phoneBatteryTime}
-                            onChange={this.onChange.bind(this, 'phoneBatteryTime')}
-                        />
-                    </OptionGroup>
-                )}	    
 
                 {this.isEnabled(['24']) && (
                     <OptionGroup title={'Phone battery state'}>
@@ -2515,7 +2512,7 @@ const getQueryParam = (variable, defaultValue) => {
 };
 
 const providerUrls = {
-    '0': 'http://api.openweathermap.org/data/2.5/weather?appid=979cbf006bf67bc368a54af240d15cf3&q=${location}',
+    '0': 'http://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${location}',
     '1': 'http://api.wunderground.com/api/${apiKey}/conditions/forecast/q/${location}.json',
     '2':
         'https://query.yahooapis.com/v1/public/yql?format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places%20where%20text%3D%22${location}%22)',
@@ -2531,11 +2528,30 @@ const verifyLocation = (loc, provider, apiKey, callback = () => {}) => {
     apiKey = apiKey || '';
     loc = encodeURIComponent(loc);
     let url = providerUrls[provider].replace('${location}', loc).replace('${apiKey}', apiKey);
+    // alert('API url: ' + url);
 
     fetch(url)
         .then((response) => {
-            if (response.status >= 400) {
-                throw new Error('Bad response from server');
+            // alert('Response status: ' + response.status + ' (Ok?: ' + response.ok + ')');
+            switch (provider) {
+                case '0':
+                    if (response.status == 401) {
+                        alert('Invalid API key. Please see https://openweathermap.org/faq#error401 for more info.');
+                        throw new Error('Invalid API key.');
+                    } else if (response.status == 404) {
+                        alert('Location not found.');
+                        throw new Error('Location not found.');
+                    } else if (response.status >= 400) {
+                        alert('Bad response from server');
+                        throw new Error('Bad response from server');
+                    }
+                    break;
+                default:
+                    if (response.status >= 400) {
+                        alert('Bad response from server');
+                        throw new Error('Bad response from server');
+                    }
+                    break;
             }
             return response.json();
         })
