@@ -1,21 +1,21 @@
 repos:
 - repo: git://github.com/pre-commit/pre-commit-hooks
-  sha: v0.9.4
+  rev: v0.9.4
   hooks:
     - id: trailing-whitespace
 - repo: git://github.com/pre-commit/mirrors-jshint
-  sha: v2.9.5
+  rev: v2.9.5
   hooks:
     - id: jshint
       exclude: ^(src\/js\/lz-string.js|configs\/)
 - repo: git://github.com/pre-commit/mirrors-fixmyjs
-  sha: v2.0.0
+  rev: v2.0.0
   hooks:
     - id: fixmyjs
       args: ['-l', '-c', '.jshintrc']
       exclude: ^(src\/js\/lz-string.js|configs\/)
 - repo: git://github.com/pre-commit/mirrors-eslint
-  sha: v4.1.1
+  rev: v4.1.1
   hooks:
   - id: eslint
     additional_dependencies: [
@@ -33,7 +33,7 @@ repos:
     types: [javascript]
     exclude: (configs\/app\/js\/util\/lz-string.js|configs\/standalone-config\/generated.js|src\/js\/settings\/generated.js|configs\/server\/)
 - repo: git://github.com/lfhbento/mirrors-prettier-eslint-cli
-  sha: v4.1.1
+  rev: v4.1.1
   hooks:
   - id: prettier-eslint
     files: ^configs\/
