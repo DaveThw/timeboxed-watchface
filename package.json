@@ -496,13 +496,13 @@
     "webpack-cli": "^6.0.1"
   },
   "scripts": {
-    "build": "webpack --config ./configs/webpack-config.js --bail --colors --progress",
-    "build:watch": "webpack --config ./configs/webpack-config.js --watch --colors --progress",
+    "build": "webpack --config ./configs/webpack-config.js --bail --color --progress",
+    "build:watch": "webpack --config ./configs/webpack-config.js --watch --color --progress",
     "clean": "rm -rf configs/dist/ && rm -rf node_modules/ && rm -rf configs/deploy/ && mkdir configs/deploy",
     "deploy": "mkdir -p configs/deploy/dist/ && cp -R configs/server/* configs/deploy/ && cp -R configs/dist/* configs/deploy/dist/",
     "build:deploy": "npm run build:configs && mkdir -p configs/deploy/dist/ && cp -R configs/server/* configs/deploy/ && cp -R configs/server-common/* configs/deploy/ && cp -R configs/dist/* configs/deploy/dist/",
     "build:deploy:start": "npm run build:deploy && (cd configs/deploy && npm install && node server.js)",
-    "build:configs": "webpack --config ./configs/webpack-config.js --bail --colors --progress && (cd configs/standalone-config && node ./generate-config.js) && mv configs/standalone-config/generated.js src/js/settings/generated.js",
+    "build:configs": "webpack --config ./configs/webpack-config.js --bail --color --progress && (cd configs/standalone-config && node ./generate-config.js) && mv configs/standalone-config/generated.js src/js/settings/generated.js",
     "build:all": "npm run build:configs && pebble build",
     "build:phone": "npm run build:all && pebble install --phone",
     "build:emulator": "npm run build:all && pebble install --emulator"
