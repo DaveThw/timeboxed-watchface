@@ -2,6 +2,8 @@
 /* eslint-disable */
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
+const TerserPlugin = require("terser-webpack-plugin");
+var autoprefixer = require('autoprefixer');
 
 var config = {
     context: __dirname + '/app',
@@ -13,6 +15,7 @@ var config = {
         path: __dirname + '/dist',
         filename: '[name].js'
     },
+    mode: 'production',
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -20,41 +23,87 @@ var config = {
             'window.jQuery': 'jquery'
         }),
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            compress: { warnings: false },
-            include: /\.min\.js$/
+            'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            include: /\.min\.js$/
+          }),
+        ],
+    },
     devtool: 'source-map',
     module: {
-        loaders: [
+
+
+        rules: [
             {
                 test: /\.js/,
-                loader: 'babel-loader',
-                exclude: /node_modules\//,
-                query: { presets: ['es2015', 'react', 'stage-2'] }
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        targets: "defaults",
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
             },
             {
                 test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader', 'sass-loader']
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        autoprefixer,
+                                    ],
+                                ],
+                            },
+                        },
+                    },
+                    'sass-loader'
+                ]
             },
-            { test: /\.css$/, loaders: ['style-loader', 'css-loader?-autoprefixer'] },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        autoprefixer,
+                                    ],
+                                ],
+                            },
+                        },
+                    },
+                ]
+            },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url-loader?limit=10000&minetype=application/font-woff'
+                // was: loader: 'url-loader?limit=10000&minetype=application/font-woff'
+                type: 'asset/inline',
             },
             {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'file-loader?name=/[hash].[ext]'
+                // was: loader: 'file-loader?name=/[hash].[ext]'
+                type: 'asset/resource',
+                generator: {
+                    filename: '/[hash].[ext]'
+                }
             }
         ]
     },
-    postcss: [autoprefixer({ browsers: ['iOS 8'] })],
     resolve: {
         alias: {
             react: 'preact-compat',

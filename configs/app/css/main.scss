@@ -1,22 +1,25 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../../../node_modules/bootstrap/scss/functions";
+
 // Core variables and mixins
-@import 'node_modules/bootstrap/scss/custom';
-@import 'node_modules/bootstrap/scss/variables';
-@import 'node_modules/bootstrap/scss/mixins';
+//@import '../../../node_modules/bootstrap/scss/custom';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins';
 
 // Reset and dependencies
-@import 'node_modules/bootstrap/scss/normalize';
+//@import '../../../node_modules/bootstrap/scss/normalize';
 
 // Core CSS
-@import 'node_modules/bootstrap/scss/reboot';
-@import 'node_modules/bootstrap/scss/type';
-@import 'node_modules/bootstrap/scss/forms';
-@import 'node_modules/bootstrap/scss/buttons';
+@import '../../../node_modules/bootstrap/scss/reboot';
+@import '../../../node_modules/bootstrap/scss/type';
+@import '../../../node_modules/bootstrap/scss/forms';
+@import '../../../node_modules/bootstrap/scss/buttons';
 
 // Components
-@import 'node_modules/bootstrap/scss/button-group';
-@import 'node_modules/bootstrap/scss/list-group';
-@import 'node_modules/bootstrap/scss/card';
-@import 'node_modules/bootstrap/scss/nav';
+@import '../../../node_modules/bootstrap/scss/button-group';
+@import '../../../node_modules/bootstrap/scss/list-group';
+@import '../../../node_modules/bootstrap/scss/card';
+@import '../../../node_modules/bootstrap/scss/nav';
 
 $bg: #555;
 $lighter-bg: #666;

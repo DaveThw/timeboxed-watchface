@@ -3,7 +3,6 @@ import objectAssign from 'object-assign';
 Object.assign = Object.assign || objectAssign;
 
 import Dropdown from 'react-dropdown';
-import FastClick from 'react-fastclick-alt';
 import LZString from './util/lz-string';
 import React, { Component, PropTypes } from 'react'; //eslint-disable-line react/no-deprecated
 import ReactDOM from 'react-dom';
@@ -1346,14 +1345,14 @@ class Swatches extends Component {
                             selectedItem={this.state.sunny ? '1' : '0'}
                             onChange={this.onColorTypeChange}
                         />
-                        <FastClick>
+                        <span>
                             {' '}
                             {this.state.sunny ? (
                                 <SwatchRows colors={this.sunlightColors} onColorChange={this.props.onColorChange} />
                             ) : (
                                 <SwatchRows colors={this.colors} onColorChange={this.props.onColorChange} />
                             )}
-                        </FastClick>
+                        </span>
                     </div>
                 )}
             </div>
@@ -2063,7 +2062,7 @@ class DropdownField extends React.Component {
     render() {
         return (
             <Field fieldName={this.props.fieldName} label={this.props.label} labelPos={this.props.labelPos}>
-                <FastClick>
+                <span>
                     <Dropdown
                         options={this.props.options}
                         name={this.props.name}
@@ -2072,7 +2071,7 @@ class DropdownField extends React.Component {
                         placeholder={'Select...'}
                         className={'dropdown'}
                     />
-                </FastClick>
+                </span>
             </Field>
         );
     }
@@ -2248,7 +2247,7 @@ class TabContainer extends Component {
         return (
             <div className="tab-container">
                 <ul className="nav nav-tabs">
-                    <FastClick>{titles}</FastClick>
+                    <span>{titles}</span>
                 </ul>
                 <div className="tab-content">{items[this.state.selectedTab]}</div>
             </div>
@@ -2356,9 +2355,9 @@ class ToggleField extends React.Component {
         return (
             <Field label={this.props.label} fieldName={this.props.fieldName} longLabel={true}>
                 <label>
-                    <FastClick>
+                    <span>
                         <Toggle className="toggle" onChange={this.toggleCheckbox} defaultChecked={this.state.checked} />
-                    </FastClick>
+                    </span>
                 </label>
             </Field>
         );
@@ -2438,7 +2437,7 @@ class RadioButtonGroup extends React.Component {
     render() {
         return (
             <Field fieldName={this.props.fieldName} label={this.props.label} labelPos={this.props.labelPos}>
-                <FastClick>
+                <span>
                     <div className="btn-group">
                         {this.props.options.map((item) => {
                             let classes = {
@@ -2458,7 +2457,7 @@ class RadioButtonGroup extends React.Component {
                             );
                         })}
                     </div>
-                </FastClick>
+                </span>
             </Field>
         );
     }
