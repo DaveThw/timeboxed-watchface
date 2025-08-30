@@ -33,7 +33,15 @@ var config = {
           }),
         ],
     },
-    devtool: 'source-map',
+    // output files seem to be quite large - changing this from 'source-map' to false makes them much smaller...
+    // devtool: 'source-map',
+    devtool: false,
+    // also increase the max sizes slightly, from 244KiB to 300KiB
+    performance: {
+        // hints: false,
+        maxEntrypointSize: 307200,
+        maxAssetSize: 307200,
+    },
     module: {
 
 
