@@ -3,7 +3,6 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 const TerserPlugin = require("terser-webpack-plugin");
-var autoprefixer = require('autoprefixer');
 
 var config = {
     context: __dirname + '/app',
