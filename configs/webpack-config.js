@@ -67,7 +67,17 @@ var config = {
                             },
                         },
                     },
-                    'sass-loader'
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sassOptions: {
+                                // Silence various depreciation warnings, coming from use of bootstrap
+                                // See, for example, here: https://stackoverflow.com/a/78786407
+                                // Depreciation IDs are defined here: https://github.com/sass/sass/blob/98c68c3/js-api-doc/deprecations.d.ts
+                                silenceDeprecations: ["import", "global-builtin", "color-functions"],
+                            },
+                        },
+                    },
                 ]
             },
             {
