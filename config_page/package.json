@@ -29,9 +29,9 @@
     "build:watch": "webpack --config ./webpack-config.js --watch --color --progress",
     "clean": "rm -rf dist/ && rm -rf node_modules/ && rm -rf deploy/",
     "deploy": "mkdir -p deploy/dist/ && cp -R server/* deploy/ && cp -R dist/* deploy/dist/",
-    "build:deploy": "npm run build:config_page && mkdir -p deploy/dist/ && cp -R server/* deploy/ && cp -R dist/* deploy/dist/",
-    "build:deploy:start": "npm run build:deploy && (cd deploy && npm install && npm run start)",
-    "build:config_page": "webpack --config ./webpack-config.js --bail --color --progress && (cd standalone-config && node ./generate-config.js) && mv standalone-config/generated.js ../src/js/settings/generated.js"
+    "build:config_page": "npm run build && (cd standalone-config && node ./generate-config.js) && mv standalone-config/generated.js ../src/js/settings/generated.js",
+    "build:deploy": "npm run build:config_page && npm run deploy",
+    "build:deploy:start": "npm run build:deploy && (cd deploy && npm install && npm run start)"
   },
   "license": "MIT"
 }
