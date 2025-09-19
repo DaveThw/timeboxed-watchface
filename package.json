@@ -491,39 +491,13 @@
     ]
   },
   "name": "Timeboxed",
-  "devDependencies": {
-    "@babel/core": "^7.28.3",
-    "@babel/preset-env": "^7.28.3",
-    "@babel/preset-react": "^7.27.1",
-    "autoprefixer": "^10.4.21",
-    "babel-loader": "^10.0.0",
-    "bootstrap": "^5.3.8",
-    "css-loader": "^7.1.2",
-    "isomorphic-fetch": "^3.0.0",
-    "postcss": "^8.5.6",
-    "postcss-loader": "^8.1.1",
-    "preact": "^8.5.3",
-    "preact-compat": "^3.19.0",
-    "react-dropdown": "^1.11.0",
-    "react-toggle": "^4.1.3",
-    "sass": "^1.91.0",
-    "sass-loader": "^16.0.5",
-    "strip-comments": "^2.0.1",
-    "style-loader": "^4.0.0",
-    "webpack": "^5.101.3",
-    "webpack-cli": "^6.0.1"
-  },
   "browserslist": [
     "iOS 8"
   ],
   "scripts": {
-    "build": "webpack --config ./config_page/webpack-config.js --bail --color --progress",
-    "build:watch": "webpack --config ./config_page/webpack-config.js --watch --color --progress",
-    "clean": "rm -rf config_page/dist/ && rm -rf node_modules/ && rm -rf config_page/deploy/ && mkdir config_page/deploy",
-    "deploy": "mkdir -p config_page/deploy/dist/ && cp -R config_page/server/* config_page/deploy/ && cp -R config_page/dist/* config_page/deploy/dist/",
-    "build:deploy": "npm run build:config_page && mkdir -p config_page/deploy/dist/ && cp -R config_page/server/* config_page/deploy/ && cp -R config_page/dist/* config_page/deploy/dist/",
-    "build:deploy:start": "npm run build:deploy && (cd config_page/deploy && npm install && npm run start)",
-    "build:config_page": "webpack --config ./config_page/webpack-config.js --bail --color --progress && (cd config_page/standalone-config && node ./generate-config.js) && mv config_page/standalone-config/generated.js src/js/settings/generated.js",
+    "clean": "rm -rf build/ && rm -rf node_modules/ && (cd config_page && npm run clean)",
+    "postinstall": "cd config_page && npm install",
+    "build:config_page": "cd config_page && npm run build:config_page",
     "build:all": "npm run build:config_page && pebble build",
     "build:phone": "npm run build:all && pebble install --phone",
     "build:emulator": "npm run build:all && pebble install --emulator"
