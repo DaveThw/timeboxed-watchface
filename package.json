@@ -517,14 +517,14 @@
     "iOS 8"
   ],
   "scripts": {
-    "build": "webpack --config ./configs/webpack-config.js --bail --color --progress",
-    "build:watch": "webpack --config ./configs/webpack-config.js --watch --color --progress",
-    "clean": "rm -rf configs/dist/ && rm -rf node_modules/ && rm -rf configs/deploy/ && mkdir configs/deploy",
-    "deploy": "mkdir -p configs/deploy/dist/ && cp -R configs/server/* configs/deploy/ && cp -R configs/dist/* configs/deploy/dist/",
-    "build:deploy": "npm run build:configs && mkdir -p configs/deploy/dist/ && cp -R configs/server/* configs/deploy/ && cp -R configs/server-common/* configs/deploy/ && cp -R configs/dist/* configs/deploy/dist/",
-    "build:deploy:start": "npm run build:deploy && (cd configs/deploy && npm install && npm run start)",
-    "build:configs": "webpack --config ./configs/webpack-config.js --bail --color --progress && (cd configs/standalone-config && node ./generate-config.js) && mv configs/standalone-config/generated.js src/js/settings/generated.js",
-    "build:all": "npm run build:configs && pebble build",
+    "build": "webpack --config ./config_page/webpack-config.js --bail --color --progress",
+    "build:watch": "webpack --config ./config_page/webpack-config.js --watch --color --progress",
+    "clean": "rm -rf config_page/dist/ && rm -rf node_modules/ && rm -rf config_page/deploy/ && mkdir config_page/deploy",
+    "deploy": "mkdir -p config_page/deploy/dist/ && cp -R config_page/server/* config_page/deploy/ && cp -R config_page/dist/* config_page/deploy/dist/",
+    "build:deploy": "npm run build:config_page && mkdir -p config_page/deploy/dist/ && cp -R config_page/server/* config_page/deploy/ && cp -R config_page/server-common/* config_page/deploy/ && cp -R config_page/dist/* config_page/deploy/dist/",
+    "build:deploy:start": "npm run build:deploy && (cd config_page/deploy && npm install && npm run start)",
+    "build:config_page": "webpack --config ./config_page/webpack-config.js --bail --color --progress && (cd config_page/standalone-config && node ./generate-config.js) && mv config_page/standalone-config/generated.js src/js/settings/generated.js",
+    "build:all": "npm run build:config_page && pebble build",
     "build:phone": "npm run build:all && pebble install --phone",
     "build:emulator": "npm run build:all && pebble install --emulator"
   }
