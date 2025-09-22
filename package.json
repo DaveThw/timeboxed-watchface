@@ -495,11 +495,22 @@
     "iOS 8"
   ],
   "scripts": {
-    "clean": "rm -rf build/ && rm -rf node_modules/ && (cd config_page && npm run clean)",
-    "postinstall": "cd config_page && npm install",
+    "clean": "rm -rf build/ && rm -rf node_modules/ && (cd config_page && npm run clean) && (cd pre-commit && npm run clean)",
+    "postinstall": "(echo '*** timeboxed-watchface/config_page/ ***' && cd config_page && npm install && echo) && (echo '*** timeboxed-watchface/pre-commit/ ***' && cd pre-commit && npm install && echo) && echo '*** timeboxed-watchface/ ***'",
     "build:config_page": "cd config_page && npm run build:config_page",
     "build:all": "npm run build:config_page && pebble build",
     "build:phone": "npm run build:all && pebble install --phone",
     "build:emulator": "npm run build:all && pebble install --emulator"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-no-loops": "^0.4.0",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "@eslint/js": "^9.36.0",
+    "@eslint/eslintrc": "^3.3.1"
   }
 }

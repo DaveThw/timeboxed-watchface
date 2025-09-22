@@ -1,0 +1,11 @@
+{
+  "name": "timeboxed-pre-commit",
+  "version": "0.0.1",
+  "description": "node_modules needed for eslint hook for pre-commit",
+  "scripts": {
+    "clean": "rm -rf node_modules/"
+  },
+  "devDependencies": {
+    "prettier-eslint-cli": "^4.1.1"
+  }
+}

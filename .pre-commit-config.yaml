@@ -7,35 +7,38 @@ repos:
   rev: v2.9.5
   hooks:
     - id: jshint
-      exclude: ^(src\/js\/lz-string.js|configs\/)
+      exclude: ^(src\/js\/lz-string.js|config_page\/)
 - repo: https://github.com/pre-commit/mirrors-fixmyjs
   rev: v2.0.0
   hooks:
     - id: fixmyjs
       args: ['-l', '-c', '.jshintrc']
-      exclude: ^(src\/js\/lz-string.js|configs\/)
+      exclude: ^(src\/js\/lz-string.js|config_page\/)
+- repo: https://github.com/lfhbento/mirrors-prettier-eslint-cli
+  rev: v4.1.1
+  hooks:
+  - id: prettier-eslint
+    additional_dependencies: [
+      'prettier-eslint-cli@4.4.1',
+    ]
+    args: [
+      --eslint-path, pre-commit/node_modules/prettier-eslint/node_modules/eslint/,
+      --prettier-path, pre-commit/node_modules/prettier/,
+      --trailing-comma, all,
+      --tab-width, "4",
+      --single-quote,
+    ]
+    files: ^config_page\/
+    types: [javascript]
+    exclude: (config_page\/app\/js\/util\/lz-string.js|config_page\/standalone-config\/generated.js|src\/js\/settings\/generated.js|config_page\/server\/)
 - repo: https://github.com/pre-commit/mirrors-eslint
   rev: v4.1.1
   hooks:
   - id: eslint
     additional_dependencies: [
-      'eslint',
-      'babel-eslint',
-      'eslint-plugin-babel',
-      'eslint-plugin-react',
-      'eslint-plugin-promise',
-      'eslint-plugin-prefer-object-spread',
-      'eslint-plugin-no-loops',
-      'eslint-plugin-sort-imports-es6-autofix'
+      'eslint'
     ]
-    args: [--quiet]
-    files: ^configs\/
+#    args: [--quiet]
+    files: ^config_page\/
     types: [javascript]
-    exclude: (configs\/app\/js\/util\/lz-string.js|configs\/standalone-config\/generated.js|src\/js\/settings\/generated.js|configs\/server\/)
-- repo: https://github.com/lfhbento/mirrors-prettier-eslint-cli
-  rev: v4.1.1
-  hooks:
-  - id: prettier-eslint
-    files: ^configs\/
-    types: [javascript]
-    exclude: (configs\/app\/js\/util\/lz-string.js|configs\/standalone-config\/generated.js|src\/js\/settings\/generated.js|configs\/server\/)
+    exclude: (config_page\/app\/js\/util\/lz-string.js|config_page\/standalone-config\/generated.js|src\/js\/settings\/generated.js|config_page\/server\/)
