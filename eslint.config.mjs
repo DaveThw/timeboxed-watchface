@@ -9,6 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
+import stylistic from '@stylistic/eslint-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,7 @@ export default defineConfig([globalIgnores(["config_page/server/*"]), {
         "prefer-object-spread": preferObjectSpread,
         react,
         promise,
+        '@stylistic': stylistic,
     },
 
     languageOptions: {
@@ -55,32 +57,37 @@ export default defineConfig([globalIgnores(["config_page/server/*"]), {
     },
 
     rules: {
-        "max-len": ["warn", 120],
+        "@stylistic/max-len": ["warn", 120, {
+            ignoreStrings: true,
+        }],
         "constructor-super": "warn",
-        "multiline-ternary": ["warn", "always-multiline"],
+        "@stylistic/multiline-ternary": ["warn", "always-multiline", { ignoreJSX: true }],
 
-        indent: ["warn", 4, {
+        "@stylistic/indent": ["warn", 4, {
             SwitchCase: 1,
+            "flatTernaryExpressions": true,
         }],
 
-        quotes: ["warn", "single"],
-        "linebreak-style": ["warn", "unix"],
+        "@stylistic/quotes": ["warn", "double", {
+            avoidEscape: true,
+        }],
+        "@stylistic/linebreak-style": ["warn", "unix"],
 
-        "brace-style": ["warn", "1tbs", {
+        "@stylistic/brace-style": ["warn", "1tbs", {
             allowSingleLine: false,
         }],
 
         curly: ["warn", "multi-line", "consistent"],
         "no-case-declarations": "warn",
-        "no-console": "warn",
+        "no-console": "off",
         "no-constant-condition": "warn",
-        "no-extra-semi": "warn",
+        "@stylistic/no-extra-semi": "warn",
         "no-empty": "warn",
         "no-empty-pattern": "warn",
         "no-fallthrough": "warn",
         "no-inner-declarations": "warn",
         "no-irregular-whitespace": "warn",
-        "no-mixed-spaces-and-tabs": "warn",
+        "@stylistic/no-mixed-spaces-and-tabs": "warn",
         "no-extra-boolean-cast": "warn",
         "no-redeclare": "warn",
         "no-undef": "warn",
@@ -97,9 +104,9 @@ export default defineConfig([globalIgnores(["config_page/server/*"]), {
         "capitalized-comments": "off",
         "no-nested-ternary": "warn",
         "one-var": ["warn", "never"],
-        semi: ["warn", "always"],
-        "arrow-parens": ["warn", "always"],
-        "comma-dangle": ["warn", "always-multiline"],
+        "@stylistic/semi": ["warn", "always"],
+        "@stylistic/arrow-parens": ["warn", "always"],
+        "@stylistic/comma-dangle": ["warn", "always-multiline"],
         "promise/always-return": "warn",
         "promise/no-return-wrap": "warn",
         "promise/param-names": "warn",
@@ -118,12 +125,12 @@ export default defineConfig([globalIgnores(["config_page/server/*"]), {
         "no-loops/no-loops": "warn",
         "no-var": "error",
 
-        "react/jsx-closing-bracket-location": ["warn", {
+        "@stylistic/jsx-closing-bracket-location": ["warn", {
             selfClosing: "line-aligned",
             nonEmpty: "after-props",
         }],
 
-        "react/jsx-wrap-multilines": ["warn", {
+        "@stylistic/jsx-wrap-multilines": ["warn", {
             declaration: true,
             assignment: true,
             return: true,

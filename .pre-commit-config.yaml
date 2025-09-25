@@ -26,7 +26,10 @@ repos:
       --prettier-path, pre-commit/node_modules/prettier/,
       --trailing-comma, all,
       --tab-width, "4",
-      --single-quote,
+      --single-quote, "false",
+      --arrow-parens, always,
+      --print-width, "120",
+      --jsx-bracket-same-line, "true",
     ]
     files: ^config_page\/
     types: [javascript]
