@@ -30,6 +30,10 @@ var config = {
         minimizer: [
             new TerserPlugin({
                 include: /\.min\.js$/,
+                extractComments: {
+                    condition: "some",
+                    banner: false,
+                },
             }),
         ],
     },
